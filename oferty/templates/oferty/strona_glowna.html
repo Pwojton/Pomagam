@@ -1,0 +1,15 @@
+{% extends "oferty/podstawowy.html" %}
+{% block content %}
+    {% for oferta in oferty %}
+        <article class="media content-section bg-steel">
+          <div class="media-body ">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ oferta.autor }}</a>
+              <small class="text-muted">{{ oferta.data }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ oferta.tytul }}</a></h2>
+            <p class="article-content">{{ oferta.tresc }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %} 
