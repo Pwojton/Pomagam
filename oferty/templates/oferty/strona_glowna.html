@@ -1,8 +1,6 @@
 <article class="media content-section bg-steel">
           <div class="media-body ">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ oferta.autor }}</a>
-              <small class="text-muted">{{ oferta.data }}</small>
               <a class="mr-2" href="#">{{ oferta.autor.get_full_name }}</a>
               <small class="text-muted">{{ oferta.data|date:"F d, Y" }}</small>
             </div>

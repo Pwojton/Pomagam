@@ -1,23 +1,11 @@
 from django.shortcuts import render
+from .models import Oferta
 
-oferty = [
-    {
-        'autor': 'ZbrSnd',
-        'tytul': 'Pomoc z matmy',
-        'tresc': 'Treść',
-        'data': 'Marzec 20, 2020',
-    },
-    {
-        'autor': 'Pwojton',
-        'tytul': 'Pomoc z matmy',
-        'tresc': 'Treść',
-        'data': 'Marzec 20, 2020',}
-
-]
 
 def glowna(request):
     context = {
-        'oferty': oferty
+    'oferty': Oferta.objects.all()
     }
 
     return render(request, 'oferty/strona_glowna.html', context)
+
