@@ -105,3 +105,6 @@ ENV/
 
 #base
 *.sqlite3
+
+# media
+media/zdjecia_profili 
