@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import RejestracjaFormularz
+from .forms import RejestracjaFormularz, AktualizacjaProfiluFormularz, AktualizacjaUżytkownikaFormularz
 from django.contrib.auth.decorators import login_required
 
 
@@ -19,4 +19,22 @@ def zarejestruj(request):
 
 @login_required
 def profil(request):
-    return render(request, 'uzytkownicy/profil.html') 
+    if request.method == 'POST':
+        u_form = AktualizacjaUżytkownikaFormularz(request.POST, instance=request.user)
+        p_form = AktualizacjaProfiluFormularz(request.POST, request.FILES, instance=request.user.profil)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Informacje zostały zaktualizowane!')
+            return redirect('profil')
+
+    else:
+        u_form = AktualizacjaUżytkownikaFormularz(instance=request.user)
+        p_form = AktualizacjaProfiluFormularz(instance=request.user.profil)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'uzytkownicy/profil.html', context) 
