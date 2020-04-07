@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'oferty.apps.OfertyConfig',
+    'uzytkownicy.apps.UzytkownicyConfig',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +119,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'oferty/static') 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'glowna'
+LOGIN_URL = 'zaloguj'
