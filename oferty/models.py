@@ -3,9 +3,32 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+TYP_POMOCY = (
+    ('NM','Nauka do matury'),
+    ('NS','Nauka do sprawdzianu'),
+    ('NL','Nauka do lekcji'),
+)
+
+TYP_OGLOSZENIA = (
+    ('SP', 'Szukam pomocy'),
+    ('OP', 'Oferuję pomoc'),
+)
+
+PRZEDMIOT = (
+    ('P','Polski'),
+    ('M','Matematyka'),
+    ('F','Fizyka'),
+    ('I','Informatyka'),
+    ('A','Angielski'),
+)
+
+
 class Oferta(models.Model):
     tytul = models.CharField(max_length=80)
     tresc = models.TextField()
+    przedmiot = models.CharField(choices=PRZEDMIOT, max_length=1)
+    typ_ogloszenia = models.CharField(choices=TYP_OGLOSZENIA, max_length=2)
+    typ_pomocy = models.CharField(choices=TYP_POMOCY, max_length=2)
     data = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 

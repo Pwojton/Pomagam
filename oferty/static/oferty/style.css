@@ -12,8 +12,46 @@ ul {
   margin: 0;
 }
 
+.pagination > li > a
+{
+    background-color: white;
+    color: #EE3733;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #EE3733 !Important;
+    border: solid 1px #EE3733 !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #EE3733 !Important;
+    border: solid 1px #EE3733;
+}
+
+
 .bg-steel {
   background-color: #5f788a;
+}
+
+.custom-bg-dark {
+  background-color: #222222;
+}
+
+.btn-danger{
+  background-color: #EE3733;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -41,7 +79,7 @@ ul {
 }
 
 a.article-title:hover {
-  color: #428bca;
+  color: #EE3733;
   text-decoration: none;
 }
 
@@ -50,8 +88,8 @@ a.article-title:hover {
 }
 
 .article-img {
-  height: 65px;
-  width: 65px;
+  height: 100px;
+  width: 100px;
   margin-right: 16px;
 }
 
