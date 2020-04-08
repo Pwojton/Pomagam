@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import RejestracjaFormularz, AktualizacjaProfiluFormularz, AktualizacjaUżytkownikaFormularz
@@ -11,7 +12,7 @@ def zarejestruj(request):
             formularz.save()
             username = formularz.cleaned_data.get('username')
             messages.success(request, f'Witaj {username}! Twoje konto zostało utworzone. Możesz się teraz zalogować')
-            return redirect('glowna')
+            return redirect('zaloguj')
     else:
         formularz = RejestracjaFormularz()
     return render(request, 'uzytkownicy/rejestracja.html', {'form': formularz})
@@ -37,4 +38,9 @@ def profil(request):
         'p_form': p_form
     }
 
-    return render(request, 'uzytkownicy/profil.html', context) 
+    return render(request, 'uzytkownicy/profil.html', context)
+
+
+def profil_innego_uzytkownika(request, pk):
+    profil = User.objects.get(pk=pk)
+    return render(request, 'uzytkownicy/profil_innego_uzytkownika.html', {'uzytkownik': profil})

@@ -8,13 +8,17 @@
           
             <div class="row">
                 <div class="col-11"><h2 class="account-heading">
-                    {{ user.get_full_name }}</h2></div>
+                    {{ user.get_full_name|default_if_none:user.username }}</h2>
+
+                </div>
                 <div class="col-1"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas
                 fa-user-edit"></i></a></div>
             </div>
                 <h6 class="text-muted">{{ user.username }}</h6>
                 <hr> <br>
-                <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary">Email: {{ user.email }}</p>
+                <p class="text-secondary">Kontakt: {{ user.profil.numer_telefonu|default_if_none:"" }}</p>
+                <p class="text-secondary">Klasa: {{ user.profil.klasa }}</p>
 			</div>
 		</div>
       </div>
@@ -31,6 +35,4 @@
           </div>
       </form>
         </div>
-      </div>
-    </div>
 {% endblock content %} 
