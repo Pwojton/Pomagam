@@ -1,8 +1,45 @@
-<article class="media content-section bg-steel">
+		<article class="media content-section bg-steel">
           <div class="media-body ">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ oferta.autor.get_full_name }}</a>
+              <a class="mr-2" href="{% url 'profil_innego_uzytkownika' oferta.autor.id %}">{{ oferta.autor.get_full_name|default:oferta.autor }}</a>
               <small class="text-muted">{{ oferta.data|date:"F d, Y" }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ oferta.tytul }}</a></h2>
+            <h2><a class="article-title" href="{% url 'oferta_szczegoly' oferta.id %}">{{ oferta.tytul }}</a></h2>
             <p class="article-content">{{ oferta.tresc }}</p>
+            </div>
+        </article>
+   	{% endfor %}
+{% if oferty.has_other_pages %}
+    <nav class="d-flex justify-content-center">
+      <ul class="pagination">
+          {% if oferty.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=
+                    {{ oferty.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+              {% endif %}
+      {% for num in oferty.paginator.page_range %}
+       {% if oferty.number == num %}
+        <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+           {% elif num > oferty.number|add:'-1' and num < oferty.number|add:'1' %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+           {% if oferty.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page=
+                {{ oferty.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+          {% endif %}
+      </ul>
+    </nav>
+{% endif %}
+
+{% endblock content %} 
+
