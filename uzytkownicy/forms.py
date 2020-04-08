@@ -23,4 +23,4 @@ class AktualizacjaUżytkownikaFormularz(forms.ModelForm):
 class AktualizacjaProfiluFormularz(forms.ModelForm):
     class Meta:
         model = Profil
-        fields = ['zdjecie'] 
+        fields = ['zdjecie', 'numer_telefonu', 'klasa'] 
