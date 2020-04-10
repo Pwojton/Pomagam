@@ -1,24 +1,27 @@
 {% extends "oferty/podstawowy.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-      <div class="media">
-      <img class="rounded-circle account-img" src="{{ uzytkownik.profil.zdjecie.url }}">
+    <div class="media">
+        <img class=" account-img" style="min-width: 250px; min-height: 250px; " src="{{ uzytkownik.profil.zdjecie.url }}">
         <div class="media-body">
-
-            <div class="row">
-                <div class="col-11"><h2 class="account-heading">
-                    {{ user.get_full_name|default_if_none:user.username }}</h2>
+            <div class="row p-3 custom-bg-dark">
+                <div class="col-11 ">
+                    <h2 class="account-heading"
+                        style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 30px;">
+                        {{ uzytkownik.get_full_name|default_if_none:uzytkownik.username }}
+                    </h2>
+                    <h6 class="text-white">{{ uzytkownik.username }}</h6>
 
                 </div>
 
             </div>
-                <h6 class="text-muted">{{ user.username }}</h6>
-                <hr> <br>
-                <p class="text-secondary">Email: {{ user.email }}</p>
-                <p class="text-secondary">Kontakt: {{ user.profil.numer_telefonu|default_if_none:"" }}</p>
-                <p class="text-secondary">Klasa: {{ user.profil.klasa }}</p>
-        </div>
-      </div>
+            <div class="mt-4 bg-white">
+                <h5 class="article-title"> Dodatkowe informacje:</h5>
+                <ul>
+                    <li class="mt-2">Email: {{ uzytkownik.email }}</li>
+                    <li class="mt-2">Kontakt: {{ uzytkownik.profil.numer_telefonu|default_if_none:"" }}</li>
+                    <li class="mt-2">Klasa: {{ uzytkownik.profil.klasa }}</li>
+                </ul>
+            </div>
       </div>
 {% endblock content %} 

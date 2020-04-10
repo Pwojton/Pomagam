@@ -1,38 +1,54 @@
 {% extends "oferty/podstawowy.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-       <div class="media">
-       <img class="rounded-circle account-img" src="{{ user.profil.zdjecie.url }}">
-        <div class="media-body">
-          
-            <div class="row">
-                <div class="col-11"><h2 class="account-heading">
-                    {{ user.get_full_name|default_if_none:user.username }}</h2>
+        <div class="media">
+            <img class=" account-img" style="min-width: 250px; min-height: 250px; " src="{{ user.profil.zdjecie.url }}">
+            <div class="media-body">
+                <div class="row p-3 custom-bg-dark">
+                    <div class="col-11 ">
+                        <h2 class="account-heading"
+                            style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 30px;">
+                            {{ user.get_full_name|default_if_none:user.username }}
+                        </h2>
+                        <h6 class="text-white">{{ user.username }}</h6>
+                    </div>
+                    <div class="col-1">
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <i class="fas fa-user-edit" style="color: #EE3733"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-4 bg-white">
+                    <h5 class="article-title"> Dodatkowe informacje:</h5>
+                    <ul>
+                        <li class="mt-2">Email: {{ user.email }}</li>
+                        <li class="mt-2">Kontakt: {{ user.profil.numer_telefonu|default_if_none:"" }}</li>
+                        <li class="mt-2">Klasa: {{ user.profil.klasa }}</li>
+                    </ul>
 
                 </div>
-                <div class="col-1"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas
-                fa-user-edit"></i></a></div>
             </div>
-                <h6 class="text-muted">{{ user.username }}</h6>
-                <hr> <br>
-                <p class="text-secondary">Email: {{ user.email }}</p>
-                <p class="text-secondary">Kontakt: {{ user.profil.numer_telefonu|default_if_none:"" }}</p>
-                <p class="text-secondary">Klasa: {{ user.profil.klasa }}</p>
 			</div>
-		</div>
-      </div>
-    <div class="content-section mt-4 collapse" id="collapseExample">
-    <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Profil Użytkownika</legend>
-              {{ u_form|crispy }}
-              {{ p_form|crispy }}
-          </fieldset>
-          <div class="form-group">
-              <button class="btn btn-outline-danger" type="submit">Aktualizuj</button>
-          </div>
-      </form>
+    <form method="POST" enctype="multipart/form-data" class="collapse" id="collapseExample">
+        {% csrf_token %}
+        <div class=" col-12 p-0 my-4 shadow mx-auto">
+            <div class="col-12 custom-bg-dark p-2">
+                <p class="mr-2"
+                   style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+                >Profil Użytkownika</p>
+            </div>
+            <div class="col-12 p-4">
+                <div class="row">
+                    <div class="col-6">
+                        {{ u_form|crispy }}
+                    </div>
+                    <div class="col-6">
+                        {{ p_form|crispy }}
+                    </div>
+                </div>
+                <button class="btn btn-danger" type="submit">Utwórz</button>
+            </div>
         </div>
+       </form>
 {% endblock content %} 

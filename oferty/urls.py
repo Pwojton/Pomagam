@@ -10,6 +10,6 @@ urlpatterns = [
     path('oferta/<int:pk>/aktualizuj', OfertaUpdateView.as_view(), name='oferta_aktualizuj'),
     path('oferta/<int:pk>/usun', OfertaDeleteView.as_view(), name='oferta_usun'),
     path('post/<int:pk>/komantarz', KomentarzCreateView.as_view(), name='komentarz_utworz'),
-    path('post/<int:pk>/komantarz/aktualizuj', KomentarzUpdateView.as_view(), name='komentarz_aktualizuj'),
-    path('post/<int:pk>/komantarz/usun', KomentarzDeleteView.as_view(), name='komentarz_usun'),
+    path('komantarz/<int:pk>/aktualizuj', KomentarzUpdateView.as_view(), name='komentarz_aktualizuj'),
+    path('komantarz/<int:pk>/usun', KomentarzDeleteView.as_view(), name='komentarz_usun'),
 ]
