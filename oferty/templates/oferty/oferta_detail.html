@@ -1,49 +1,49 @@
 {% extends "oferty/podstawowy.html" %}
 {% block content %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.autor.profil.zdjecie.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2">{{ object.autor }}</a>
-        <small class="text-muted">{{ object.data|date:"F d, Y" }}</small>
-        {% if object.autor == user %}
-          <div>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_aktualizuj' object.id %}">Aktualizuj</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_usun' object.id %}">Usuń</a>
-          </div>
-        {% endif %}
-      </div>
-      <h2 class="article-title">{{ object.tytul }}</h2>
-      <p class="article-content">{{ object.tresc }}</p>
-    </div>
-  </article>
-    {% if user.is_authenticated%}
-      <hr>
-      <a class="btn btn-danger" href="{% url 'komentarz_utworz' object.id %}">Dodaj Komentarz</a>
-        {% endif %}
-      <hr>
-      <h3> Komantarze: {{ komentarze.count }}</h3>
-    {% for komantarz in komentarze.all %}
-
-        <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ komantarz.autor.profil.zdjecie.url }}">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a href="{% url 'profil_innego_uzytkownika' komantarz.autor.id %}" class="mr-2">{{ komantarz.autor.get_full_name|default:komantarz.autor}}</a>
-              <small class="text-muted">{{ komantarz.date|date:"d.m.Y"  }}</small>
-              {%if object.autor == user%}
-                  <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_aktualizuj' komantarz.id %}">
-                      <span><i class="fas fa-pen text-danger d-flex " ></i></span>
-                  </a>
-                   <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_usun' komantarz.id %}">
-                      <span><i class="fas fa-trash-alt text-danger d-flex " ></i></span>
-                  </a>
-
-              {% endif %}
-          </div>
-          <p class="article-content">{{ komantarz.tresc|linebreaks }}</p>
+    <div class=" col-10 p-0 my-4 shadow mx-auto">
+        <div class="col-12 custom-bg-dark p-3">
+            <a class="mr-2"
+               style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+               href="{% url 'profil_innego_uzytkownika' oferta.autor.id %}">{{ autor.get_full_name|default:oferta.autor }}</a>
+            <small class="text-muted">{{ oferta.data|date:"F d, Y" }}</small>
+            {% if oferta.autor == request.user %}
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_aktualizuj' object.id %}">Aktualizuj</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_usun' object.id %}">Usuń</a>
+            {% endif %}
         </div>
-      </article>
-
+        <div class="col-12">
+            <h2><p class="article-title">{{ object.tytul }}</p></h2>
+            <p class="article-content pb-3 px-3">{{ object.tresc }}</p>
+        </div>
+    </div>
+  
+  {% if user.is_authenticated %}
+        <hr>
+        <a class="btn btn-danger" href="{% url 'komentarz_utworz' object.id %}">Dodaj Komentarz</a>
+    {% endif %}
+    <hr>
+    <h3> komentarze: {{ komentarze.count }}</h3>
+    {% for komentarz in komentarze.all %}
+        <div class=" col-6 p-0 my-4 shadow">
+            <div class="col-12 custom-bg-dark p-1">
+                <img class="rounded-circle article-img" src="{{ komentarz.autor.profil.zdjecie.url }}"
+                     style="max-width: 50px; max-height: 50px;">
+                <a class="mr-2"
+                   style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+                   href="{% url 'profil_innego_uzytkownika' komentarz.autor.id %}">{{ komentarz.autor.get_full_name|default:komentarz.autor }}</a>
+                <small class="text-muted">{{ komentarz.date|date:"d.m.Y" }}</small>
+                {% if komentarz.autor == request.user %}
+                    <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_aktualizuj' komentarz.pk %}">
+                        <span><i class="fas fa-pen text-danger d-flex "></i></span>
+                    </a>
+                    <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_usun' komentarz.pk %}">
+                        <span><i class="fas fa-trash-alt text-danger d-flex "></i></span>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <p class="article-content p-3">{{ komentarz.tresc }}</p>
+            </div>
+        </div>
     {% endfor %}
 {% endblock content %} 
