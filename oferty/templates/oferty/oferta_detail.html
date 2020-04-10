@@ -8,7 +8,7 @@
         <small class="text-muted">{{ object.data|date:"F d, Y" }}</small>
         {% if object.autor == user %}
           <div>
-            <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'oferta_aktualizuj' object.id %}">Aktualizuj</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_aktualizuj' object.id %}">Aktualizuj</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'oferta_usun' object.id %}">Usuń</a>
           </div>
         {% endif %}
@@ -19,7 +19,7 @@
   </article>
     {% if user.is_authenticated%}
       <hr>
-      <a class="btn btn-primary" href="{% url 'komentarz_utworz' object.id %}">Dodaj Komentarz</a>
+      <a class="btn btn-danger" href="{% url 'komentarz_utworz' object.id %}">Dodaj Komentarz</a>
         {% endif %}
       <hr>
       <h3> Komantarze: {{ komentarze.count }}</h3>
@@ -33,7 +33,7 @@
               <small class="text-muted">{{ komantarz.date|date:"d.m.Y"  }}</small>
               {%if object.autor == user%}
                   <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_aktualizuj' komantarz.id %}">
-                      <span><i class="fas fa-pen text-info d-flex " ></i></span>
+                      <span><i class="fas fa-pen text-danger d-flex " ></i></span>
                   </a>
                    <a class="btn btn-sm mt-1 mb-1" href="{% url 'komentarz_usun' komantarz.id %}">
                       <span><i class="fas fa-trash-alt text-danger d-flex " ></i></span>
