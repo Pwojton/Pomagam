@@ -4,8 +4,10 @@
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'oferty/style.css' %}">
 
     {% if title %}
@@ -15,47 +17,46 @@
     {% endif %}
 </head>
 <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark custom-bg-dark fixed-top ">
+<header class="site-header">
+    <nav class="navbar navbar-expand-md  custom-bg-dark fixed-top ">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'glowna' %}">Pomoc</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'glowna' %}">Strona Główna</a>
-            </div>
-
-            <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'oferta_utworz' %}">Nowa Oferta</a>
-                <a class="nav-item nav-link" href="{% url 'profil' %}">Profile</a>
-                <a class="nav-item nav-link" href="{% url 'wyloguj' %}">Logout</a>
-              {% else %}
-                <a class="nav-item nav-link" href="{% url 'zaloguj' %}">Login</a>
-                <a class="nav-item nav-link" href="{% url 'zarejestruj' %}">Register</a>
-              {% endif %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'glowna' %}">Strona Główna</a>
+                </div>
+                <div class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <a class="nav-item nav-link text-white" href="{% url 'oferta_utworz' %}">Nowa Oferta</a>
+                        <a class="nav-item nav-link text-white" href="{% url 'profil' %}">Profil</a>
+                        <a class="nav-item nav-link text-white" href="{% url 'wyloguj' %}">Wyloguj</a>
+                    {% else %}
+                        <a class="nav-item nav-link text-white" href="{% url 'zaloguj' %}">Loguj</a>
+                        <a class="nav-item nav-link text-white" href="{% url 'zarejestruj' %}">Rejestracja</a>
+                    {% endif %}
 
             </div>
           </div>
         </div>
       </nav>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
+	</header>
+	<main role="main" class="container">
+    <div class="row">
         <div class="col-md-12">
-          <div class="container mt-5 pt-4">
-          {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message|safe }}
-                  </div>
-                {% endfor %}
-          {% endif %}
-        </div>
-          {% block content %}{% endblock %}
+            <div class="container mt-5 pt-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message|safe }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% block content %}{% endblock %}
         </div>
       </div>
     </main>
@@ -63,16 +64,15 @@
 	     <footer class="mt-5 py-5 custom-bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-md-0 mt-3 text-white mx-auto text-center">
-
-        <!-- Content -->
-        <h5 class="text-uppercase font-weight-bold text-white">Pomoc!</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-          repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-          harum esse fugiat. Itaque, culpa?</p>
-                        <p>Nie masz jeszcze konta?<span class="ml-3"><a class="btn btn-outline-light" href="{% url 'zarejestruj' %}">Dołącz do nas!</a></span> </p>
-
-      </div>
+           <div class="col-8 mt-md-0 mt-3 text-white mx-auto text-center">
+                <h5 class="text-uppercase font-weight-bold text-white">Pomoc!</h5>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
+                    repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
+                    harum esse fugiat. Itaque, culpa?</p>
+                <p>Nie masz jeszcze konta?<span class="ml-3"><a class="btn btn-outline-light"
+                                                                href="{% url 'zarejestruj' %}">Dołącz do nas!</a></span>
+                </p>
+            </div>
         </div>
     </div>
       <hr style="border: 1px solid white;">
