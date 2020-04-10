@@ -1,15 +1,39 @@
 body {
-  background: #fafafa;
+  background: #ffffff;
   color: #333333;
   margin-top: 5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
+@font-face {
+  font-family: 'Poppins-black';
+  src: local('fonts/Poppins-Black.ttf'),
+       url('fonts/Poppins-Black.ttf') format("truetype");
+}
+
+h1, h2, h3, h4, h5, h6, label {
+  color: #222222;
+    font-family: "Poppins-black", Arial, sans-serif;
+}
+
+div.shadow {
+  box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 ul {
   margin: 0;
+}
+
+.navbar .navbar-nav > a {
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: "Poppins-black", Arial, sans-serif;
 }
 
 .pagination > li > a
@@ -50,7 +74,18 @@ ul {
   background-color: #222222;
 }
 
-.btn-danger{
+.custom-bg-danger {
+  background-color: #EE3733;
+}
+
+.custom-bg-danger ul, .bg-white ul {
+    list-style-type: square;
+     color: #222222;
+    font-family: "Poppins-black", Arial, sans-serif;
+    font-size: 15px;
+}
+
+.btn-danger {
   background-color: #EE3733;
 }
 
@@ -75,7 +110,7 @@ ul {
 }
 
 .article-title {
-  color: #444444;
+  color: #222222;
 }
 
 a.article-title:hover {
