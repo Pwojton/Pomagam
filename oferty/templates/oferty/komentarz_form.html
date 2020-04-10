@@ -1,9 +1,21 @@
 {% extends 'oferty/podstawowy.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>Dodaj Komentarz</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="save btn btn-danger">Stwórz</button>
+    <form method="POST">
+        {% csrf_token %}
+        <div class=" col-10 p-0 my-4 shadow mx-auto">
+            <div class="col-12 custom-bg-dark p-2">
+                <p class="mr-2"
+                   style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+                >Dodaj Komentarz</p>
+            </div>
+            <div class="col-12 p-4">
+                <form method="POST" class="post-form">{% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="save btn btn-danger">Stwórz</button>
+                </form>
+            </div>
+        </div>
     </form>
+    
 {% endblock %} 
