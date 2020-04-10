@@ -1,45 +1,109 @@
-		<article class="media content-section bg-steel">
-          <div class="media-body ">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'profil_innego_uzytkownika' oferta.autor.id %}">{{ oferta.autor.get_full_name|default:oferta.autor }}</a>
-              <small class="text-muted">{{ oferta.data|date:"F d, Y" }}</small>
+{% extends "oferty/podstawowy.html" %}
+{% load static %}
+{% block content %}
+    <div class="row"></div>
+    <div class="row align-items-center my-5 shadow custom-bg-danger">
+        <div class="col-7 d-none d-lg-block" style="padding:0;">
+            <img class="img-fluid mb-4 mb-lg-0" src="{% static 'oferty/img/bg.jpg' %}"
+                 style=" max-height: 600px;" alt="">
+        </div>
+        <div class="col-lg-5 ">
+            <h1 class="font-weight-light p-3"
+                style=" text-transform: uppercase; margin-bottom: 0.5rem; font-size: 48px; color: #000000; line-height: 1.3; font-weight: 900;">
+                Wspólna nauka w CG!</h1>
+            <hr style="border: black solid 2px;" class="mr-5">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                A assumenda dignissimos ducimus iure magni numquam odio, officia perspiciatis placeat quae, quam quas
+                quisquam
+                reprehenderit sapiente sed suscipit vero! Eius, perspiciatis.</p>
+            <a class="btn btn-lg btn-dark custom-bg-dark my-3" href="{% url 'zarejestruj' %}">Dołącz do nas!</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-12">
+            {% for oferta in oferty %}
+                <div class="row">
+                    <div class=" col-7 p-0 my-4 shadow">
+                        <div class="col-12 custom-bg-dark p-3">
+                            <a class="mr-2"
+                               style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+                               href="{% url 'profil_innego_uzytkownika' oferta.autor.id %}">{{ oferta.autor.get_full_name|default:oferta.autor }}</a>
+                            <small class="text-muted">{{ oferta.data|date:"F d, Y" }}</small></div>
+                        <div class="col-12">
+                            <h2><a class="article-title"
+                                   href="{% url 'oferta_szczegoly' oferta.id %}">{{ oferta.tytul }}</a></h2>
+                            <p class="article-content">{{ oferta.tresc }}</p>
+                        </div>
+                    </div>
+                    <div class="col-5 custom-bg-danger p-4 shadow">
+                        <h5 class="article-title"> Dodatkowe informacje:</h5>
+                        <ul>
+                            <li>{{ oferta.get_typ_ogloszenia_display }}</li>
+                            <li>{{ oferta.get_przedmiot_display }}</li>
+                            <li>{{ oferta.get_typ_pomocy_display }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr style="border: black solid 1px;" class="mx-5">
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+
+            <div class="card shadow">
+                <h5 class="card-header custom-bg-dark shadow" style=" color: white">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <form method="GET" class="form-inline">
+                            <div class="md-form my-0">
+                                <input class="form-control mr-sm-2" type="text" name="q" value="{{ request.GET.q }}"
+                                       type="text" placeholder="Szukaj..." aria-label="Search">
+                                <span class="input-group-btn"><button class="btn btn-danger" type="submit"><i
+                                        class="fas fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <h2><a class="article-title" href="{% url 'oferta_szczegoly' oferta.id %}">{{ oferta.tytul }}</a></h2>
-            <p class="article-content">{{ oferta.tresc }}</p>
+            <div class="card my-4 shadow">
+                <h5 class="card-header custom-bg-dark" style=" color: white">Side Widget</h5>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </div>
             </div>
-        </article>
-   	{% endfor %}
-{% if oferty.has_other_pages %}
-    <nav class="d-flex justify-content-center">
-      <ul class="pagination">
-          {% if oferty.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page=
+
+        </div>
+
+    </div>
+    {% if oferty.has_other_pages %}
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+                {% if oferty.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=
                     {{ oferty.previous_page_number }}" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-              {% endif %}
-      {% for num in oferty.paginator.page_range %}
-       {% if oferty.number == num %}
-        <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-           {% elif num > oferty.number|add:'-1' and num < oferty.number|add:'1' %}
-        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-      {% endfor %}
-           {% if oferty.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page=
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for num in oferty.paginator.page_range %}
+                    {% if oferty.number == num %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% elif num > oferty.number|add:'-1' and num < oferty.number|add:'1' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if oferty.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=
                 {{ oferty.next_page_number }}" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-          {% endif %}
-      </ul>
-    </nav>
-{% endif %}
-
-{% endblock content %} 
-
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock content %}

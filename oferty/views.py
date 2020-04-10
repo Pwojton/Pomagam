@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
@@ -9,9 +10,13 @@ from django.views.generic import ListView, DetailView, CreateView,\
 
 def glowna(request):
     lista = Oferta.objects.all().order_by('-data')
-    paginator = Paginator(lista, 1)
-    strona = request.GET.get('page')
+    zapytanie = request.GET.get('q')
+    print(zapytanie)
+    if zapytanie:
+        lista = Oferta.objects.filter(Q(tytul__icontains=zapytanie)).distinct()
 
+    paginator = Paginator(lista, 10)
+    strona = request.GET.get('page')
     try:
         oferty = paginator.page(strona)
     except PageNotAnInteger:
@@ -20,6 +25,7 @@ def glowna(request):
         oferty = paginator.page(paginator.num_pages)
 
     context = {
+        'lista': lista,
     	'oferty': oferty
     }
 
@@ -36,7 +42,7 @@ class OfertaDetailView(DetailView):
 
 class OfertaCreateView(LoginRequiredMixin, CreateView):
     model = Oferta
-    fields = ['tytul', 'tresc']
+    fields = ['tytul', 'tresc', 'przedmiot', 'typ_ogloszenia', 'typ_pomocy']
 
     def form_valid(self, form):
         form.instance.autor = self.request.user
