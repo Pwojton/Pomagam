@@ -41,6 +41,7 @@ def profil(request):
     return render(request, 'uzytkownicy/profil.html', context)
 
 
+
 def profil_innego_uzytkownika(request, pk):
     profil = User.objects.get(pk=pk)
-    return render(request, 'uzytkownicy/profil_innego_uzytkownika.html', {'uzytkownik': profil})
+     return render(request, 'uzytkownicy/profil_innego_uzytkownika.html', {'uzytkownik': profil})
