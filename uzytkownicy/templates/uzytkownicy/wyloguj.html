@@ -1,9 +1,15 @@
 {% extends "oferty/podstawowy.html" %}
 {% block content %}
-    <h2>Zostałeś wylogowany</h2>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            <a href="{% url 'zaloguj' %}">Zaloguj ponownie</a>
-        </small>
-    </div>
-{% endblock content %}  
+<form method="POST">
+        {% csrf_token %}
+        <div class=" col-10 p-0 my-4 shadow mx-auto">
+            <div class="col-12 custom-bg-dark p-2">
+                <p class="mr-2"
+                   style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"> Zostałeś wylogowany</p>
+            </div>
+            <div class="col-12 p-4">
+                <h5><a style="color: black;" href="{% url 'zaloguj' %}">Zaloguj ponownie</a></h5>
+            </div>
+        </div>
+    </form>
+{% endblock content %} 

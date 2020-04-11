@@ -1,21 +1,22 @@
-{% extends "oferty/podstawowy.html" %}
+{% extends 'oferty/podstawowy.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Dołącz już dziś!</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-danger" type="submit">Zarejestruj</button>
+    <form method="POST">
+        {% csrf_token %}
+        <div class=" col-10 p-0 my-4 shadow mx-auto">
+            <div class="col-12 custom-bg-dark p-2">
+                <p class="mr-2"
+                   style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;"
+                >Dołącz już dziś!</p>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Masz już konto? <a class="ml-2" href="{% url 'zaloguj' %}">Zaloguj</a>
-            </small>
-        </div>
-    </div>
-{% endblock content %} 
+            <div class="col-12 p-4">
+                {{ form|crispy }}
+                <button class="btn btn-danger" type="submit">Zarejestruj</button>
+            </div>
+            <div class="border-top py-3 m-3">
+                <small style="color: #EE3733; text-transform: uppercase; font-weight: 900; font-size: 15px;">
+                    Masz już konto? <a class="ml-2 text-dark" href="{% url 'zaloguj' %}">Zaloguj</a>
+                </small>
+            </div>
+    </form>
+{% endblock %} 
